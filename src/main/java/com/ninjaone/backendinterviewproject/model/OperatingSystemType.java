@@ -3,6 +3,8 @@ package com.ninjaone.backendinterviewproject.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -15,4 +17,8 @@ public class OperatingSystemType implements AbstractEntity<String> {
         @Id
         @Column(name = "operating_system_type")
         private String id;
+
+        @ManyToOne
+        @JoinColumn(nullable = false)
+        private OperatingSystem operatingSystem;
 }
