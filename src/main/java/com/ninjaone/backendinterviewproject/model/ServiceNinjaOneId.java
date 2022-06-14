@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-public class ServiceId implements Serializable {
+public class ServiceNinjaOneId implements Serializable {
 
     @Column(name = "service_name")
     private String serviceName;

@@ -12,9 +12,9 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "service_ninja_one")
-public class ServiceNinjaOne implements AbstractEntity<ServiceId> {
+public class ServiceNinjaOne implements AbstractEntity<ServiceNinjaOneId> {
     @EmbeddedId
-    ServiceId id;
+    ServiceNinjaOneId id;
 
     @Column(name = "service_price")
     private BigDecimal servicePrice;
