@@ -8,7 +8,5 @@ import com.ninjaone.backendinterviewproject.service.api.CustomerServiceInterface
 
 @Service
 public class CustomerService extends AbstractServiceImpl<Customer, String, CustomerRepository>  implements CustomerServiceInterface{
-    public CustomerService(CustomerRepository repository) {
-        super(repository);
-    }
+
 }

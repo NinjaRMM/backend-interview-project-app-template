@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -13,15 +14,14 @@ import org.springframework.stereotype.Service;
 import com.ninjaone.backendinterviewproject.model.AbstractEntity;
 import com.ninjaone.backendinterviewproject.service.api.AbstractServiceInterface;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Service
 @Getter
-@AllArgsConstructor
-public abstract class AbstractServiceImpl<T extends AbstractEntity <K>, K extends Serializable, R extends PagingAndSortingRepository<T, K>>
+public abstract class AbstractServiceImpl<T extends AbstractEntity<K>, K extends Serializable, R extends PagingAndSortingRepository<T, K>>
         implements AbstractServiceInterface<T, K> {
-
+            
+    @Autowired
     R repository;
 
     @Override
@@ -33,7 +33,6 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity <K>, K extend
     public T update(T entity) {
         return getRepository().save(entity);
     }
-
 
     @Override
     public void delete(T entity) {

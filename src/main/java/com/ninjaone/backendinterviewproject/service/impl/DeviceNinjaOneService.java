@@ -9,7 +9,4 @@ import com.ninjaone.backendinterviewproject.service.api.DeviceNinjaOneServiceInt
 @Service
 public class DeviceNinjaOneService extends AbstractServiceImpl<DeviceNinjaOne, Long, DeviceNinjaOneRepository>
         implements DeviceNinjaOneServiceInterface {
-    public DeviceNinjaOneService(DeviceNinjaOneRepository repository) {
-        super(repository);
-    }
 }
