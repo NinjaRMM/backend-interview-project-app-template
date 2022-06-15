@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 
+import com.ninjaone.backendinterviewproject.exception.GenericException;
 import com.ninjaone.backendinterviewproject.model.AbstractEntity;
 import com.ninjaone.backendinterviewproject.service.api.AbstractServiceInterface;
 
@@ -22,10 +23,10 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity<K>, K extends
         implements AbstractServiceInterface<T, K> {
             
     @Autowired
-    R repository;
+    protected R repository;
 
     @Override
-    public T create(T entity) {
+    public T create(T entity) throws GenericException {
         return getRepository().save(entity);
     }
 

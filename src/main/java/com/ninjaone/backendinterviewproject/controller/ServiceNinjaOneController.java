@@ -11,8 +11,4 @@ import com.ninjaone.backendinterviewproject.service.api.ServiceNinjaOneServiceIn
 @RequestMapping(path = "api/admin/v1/service")
 public class ServiceNinjaOneController
         extends AbstractController<ServiceNinjaOne, Long, ServiceNinjaOneServiceInterface> {
-
-    public ServiceNinjaOneController(ServiceNinjaOneServiceInterface service) {
-        super(service);
-    }
 }

@@ -11,12 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.ninjaone.backendinterviewproject.model.interfaces.OperatingSystemIdInterface;
+
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "device_ninja_one")
-public class DeviceNinjaOne implements AbstractEntity<Long>  {
+public class DeviceNinjaOne implements AbstractEntity<Long>, OperatingSystemIdInterface {
     @Id
     @SequenceGenerator(
             name = "device_sequence",
@@ -41,4 +43,9 @@ public class DeviceNinjaOne implements AbstractEntity<Long>  {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Customer customerOwner;
+
+    @Override
+    public String getOperatingSystemId() {
+        return getOperatingSystemType().getOperatingSystem().getId();
+}
 }

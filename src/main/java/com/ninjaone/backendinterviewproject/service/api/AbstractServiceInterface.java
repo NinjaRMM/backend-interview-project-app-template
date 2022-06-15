@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.ninjaone.backendinterviewproject.exception.GenericException;
+
 @Service
 public interface AbstractServiceInterface<T, K> {
 
-    public T create(T entity);
+    public T create(T entity) throws GenericException;
 
     public T update(T entity);
 

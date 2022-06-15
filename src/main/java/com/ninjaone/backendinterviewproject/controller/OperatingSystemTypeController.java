@@ -12,7 +12,4 @@ import com.ninjaone.backendinterviewproject.service.api.OperatingSystemTypeServi
 public class OperatingSystemTypeController
         extends AbstractController<OperatingSystemType, String, OperatingSystemTypeServiceInterface> {
 
-    public OperatingSystemTypeController(OperatingSystemTypeServiceInterface service) {
-        super(service);
-    }
 }
