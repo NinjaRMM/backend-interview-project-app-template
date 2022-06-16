@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,7 +41,7 @@ public class CustomerServiceCostServiceTest {
 		listOfDeviceNinjaOne.add(new DeviceNinjaOne("PC03","MAC","APPLE MACOS","12345"));
 		listOfDeviceNinjaOne.add(new DeviceNinjaOne("PC04","MAC", "APPLE MACOS","12345"));
 		listOfDeviceNinjaOne.add(new DeviceNinjaOne("PC05","MAC","APPLE MACOS","12345"));
-		List<ServiceNinjaOne> listOfServiceNinjaOne = new ArrayList<>();
+		Set<ServiceNinjaOne> listOfServiceNinjaOne = new HashSet<>();
 		listOfServiceNinjaOne.add(new ServiceNinjaOne("DEVICE", "GENERIC", 4.00));
 		listOfServiceNinjaOne.add(new ServiceNinjaOne("ANTIVIRUS", "MICROSOFT WINDOWS", 5.00));
 		listOfServiceNinjaOne.add(new ServiceNinjaOne("ANTIVIRUS", "APPLE MACOS", 7.00));

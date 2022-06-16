@@ -1,6 +1,7 @@
 package com.ninjaone.backendinterviewproject.model;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,5 +36,5 @@ public class Customer implements AbstractEntity<String> {
 
     @ManyToMany
     @JoinTable(name = "customer_service", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
-    private List<ServiceNinjaOne> services;
+    private Set<ServiceNinjaOne> services;
 }
