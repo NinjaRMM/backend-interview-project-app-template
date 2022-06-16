@@ -2,7 +2,7 @@ package com.ninjaone.backendinterviewproject.model;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,11 +17,15 @@ import javax.persistence.Table;
 
 import com.ninjaone.backendinterviewproject.model.interfaces.OperatingSystemIdInterface;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "service_ninja_one")
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class ServiceNinjaOne implements AbstractEntity<Long>, OperatingSystemIdInterface {
         @Id
         @SequenceGenerator(name = "service_sequence", sequenceName = "service_sequence", allocationSize = 1)
@@ -29,9 +33,11 @@ public class ServiceNinjaOne implements AbstractEntity<Long>, OperatingSystemIdI
         @Column(name = "service_id", updatable = false)
         private Long id;
 
+        @NonNull
         @Column(name = "service_name")
         private String serviceName;
 
+        @NonNull
         @ManyToOne
         @JoinColumn(name = "operating_system_id", nullable = false)
         private OperatingSystem operatingSystem;
@@ -41,11 +47,17 @@ public class ServiceNinjaOne implements AbstractEntity<Long>, OperatingSystemIdI
 
         @ManyToMany
         @JoinTable(name = "customer_service", joinColumns = @JoinColumn(name = "service_id"), inverseJoinColumns = @JoinColumn(name = "customer_id"))
-        private Set<Customer> customers;
+        private List<Customer> customers;
 
         @Override
         public String getOperatingSystemId() {
                 return operatingSystem.getId();
+        }
+
+        public ServiceNinjaOne(String serviceName, String operatingSystemId, double servicePrice) {
+                this.serviceName = serviceName;
+                this.operatingSystem = new OperatingSystem(operatingSystemId);
+                this.servicePrice = servicePrice;
         }
 
 }

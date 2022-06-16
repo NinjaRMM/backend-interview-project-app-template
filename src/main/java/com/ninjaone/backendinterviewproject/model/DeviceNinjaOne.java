@@ -4,6 +4,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,11 +14,17 @@ import javax.persistence.Table;
 
 import com.ninjaone.backendinterviewproject.model.interfaces.OperatingSystemIdInterface;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "device_ninja_one")
+@AllArgsConstructor
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class DeviceNinjaOne implements AbstractEntity<Long>, OperatingSystemIdInterface {
     @Id
     @SequenceGenerator(
@@ -33,19 +40,27 @@ public class DeviceNinjaOne implements AbstractEntity<Long>, OperatingSystemIdIn
             updatable = false)
     private Long id;
 
+    @NonNull
     @Column(name = "system_name")
     private String systemName;
 
+    @NonNull
     @ManyToOne
     @JoinColumn(nullable = false)
     private OperatingSystemType operatingSystemType;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private Customer customerOwner;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false, updatable = false)
+    private Customer customer;
 
     @Override
     public String getOperatingSystemId() {
         return getOperatingSystemType().getOperatingSystem().getId();
+}
+
+public DeviceNinjaOne(String systemName, String operatingSystemTypeId, String operatingSystemId, String customerId) {
+        this.systemName = systemName;
+        this.operatingSystemType = new OperatingSystemType(operatingSystemTypeId,operatingSystemId);
+        this.customer = new Customer(customerId);
 }
 }
