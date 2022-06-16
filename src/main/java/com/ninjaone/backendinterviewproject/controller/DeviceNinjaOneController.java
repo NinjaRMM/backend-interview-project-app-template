@@ -8,7 +8,7 @@ import com.ninjaone.backendinterviewproject.service.api.DeviceNinjaOneServiceInt
 
 
 @RestController
-@RequestMapping(path = "api/admin/v1/device")
+@RequestMapping(path = "api/v1/admin/device")
 public class DeviceNinjaOneController
         extends AbstractController<DeviceNinjaOne, Long, DeviceNinjaOneServiceInterface> {
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ninjaone.backendinterviewproject.exception.GenericException;
 import com.ninjaone.backendinterviewproject.model.Customer;
 import com.ninjaone.backendinterviewproject.model.ServiceNinjaOne;
 import com.ninjaone.backendinterviewproject.service.api.CustomerServiceCostServiceInterface;
@@ -24,7 +23,7 @@ public class ServiceService implements ServiceServiceInterface {
     CustomerServiceCostServiceInterface customerServiceCostServiceInterface;
 
     @Override
-    public ServiceNinjaOne addServiceToCustomer(Long serviceId, String customerId) throws GenericException {
+    public ServiceNinjaOne addServiceToCustomer(Long serviceId, String customerId) {
         ServiceNinjaOne serviceNinjaOne = serviceNinjaOneServiceInterface.findById(serviceId);
         Customer customer = customerServiceInterface.findById(customerId);
         customer.getServices().add(serviceNinjaOne);
@@ -33,7 +32,7 @@ public class ServiceService implements ServiceServiceInterface {
     }
 
     @Override
-    public void deleteServiceOfCustomer(Long serviceId, String customerId) throws GenericException {
+    public void deleteServiceOfCustomer(Long serviceId, String customerId) {
         ServiceNinjaOne serviceNinjaOne = serviceNinjaOneServiceInterface.findById(serviceId);
         Customer customer = customerServiceInterface.findById(customerId);
         customer.getServices().remove(serviceNinjaOne);

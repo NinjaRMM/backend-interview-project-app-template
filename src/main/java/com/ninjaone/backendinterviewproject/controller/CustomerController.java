@@ -8,7 +8,7 @@ import com.ninjaone.backendinterviewproject.service.api.CustomerServiceInterface
 
 
 @RestController
-@RequestMapping(path = "api/admin/v1/customer")
+@RequestMapping(path = "api/v1/admin/customer")
 public class CustomerController
         extends AbstractController<Customer, String, CustomerServiceInterface> {
 }

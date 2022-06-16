@@ -8,7 +8,7 @@ import com.ninjaone.backendinterviewproject.service.api.OperatingSystemTypeServi
 
 
 @RestController
-@RequestMapping(path = "api/admin/v1/operatingsystemtype")
+@RequestMapping(path = "api/v1/admin/operatingsystemtype")
 public class OperatingSystemTypeController
         extends AbstractController<OperatingSystemType, String, OperatingSystemTypeServiceInterface> {
 

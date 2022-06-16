@@ -8,7 +8,7 @@ import com.ninjaone.backendinterviewproject.service.api.OperatingSystemServiceIn
 
 
 @RestController
-@RequestMapping(path = "api/admin/v1/operatingsystem")
+@RequestMapping(path = "api/v1/admin/operatingsystem")
 public class OperatingSystemController
         extends AbstractController<OperatingSystem, String, OperatingSystemServiceInterface> {
 
