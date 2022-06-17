@@ -58,9 +58,9 @@ public class DeviceNinjaOne implements AbstractEntity<Long>, OperatingSystemIdIn
         return getOperatingSystemType().getOperatingSystem().getId();
 }
 
-public DeviceNinjaOne(String systemName, String operatingSystemTypeId, String operatingSystemId, String customerId) {
+public DeviceNinjaOne(String systemName, String operatingSystemTypeId, String customerId) {
         this.systemName = systemName;
-        this.operatingSystemType = new OperatingSystemType(operatingSystemTypeId,operatingSystemId);
+        this.operatingSystemType = new OperatingSystemType(operatingSystemTypeId);
         this.customer = new Customer(customerId);
 }
 }

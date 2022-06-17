@@ -38,7 +38,7 @@ public class ServiceController {
         }
     }
 
-    @GetMapping("/services")
+    @GetMapping("")
     public ResponseEntity<Iterable<ServiceDTO>> findAllServiceOfCustomer(@PathVariable String customerId) {
         try {
             List<ServiceNinjaOne> services = serviceServiceInterface.findAllServiceOfCustomer(customerId);

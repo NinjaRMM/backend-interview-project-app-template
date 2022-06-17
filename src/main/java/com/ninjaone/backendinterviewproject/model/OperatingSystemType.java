@@ -22,6 +22,10 @@ public class OperatingSystemType implements AbstractEntity<String> {
                 this.operatingSystem = new OperatingSystem(operatingSystemId);
         }
 
+        public OperatingSystemType(String operatingSystemTypeId) {
+                this.id = operatingSystemTypeId;
+        }
+
         @NonNull
         @Id
         @Column(name = "operating_system_type_id")
