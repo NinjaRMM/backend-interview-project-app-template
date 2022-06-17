@@ -19,6 +19,7 @@ import com.ninjaone.backendinterviewproject.model.interfaces.OperatingSystemIdIn
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Table(name = "service_ninja_one")
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 public class ServiceNinjaOne implements AbstractEntity<Long>, OperatingSystemIdInterface {
         @Id
         @SequenceGenerator(name = "service_sequence", sequenceName = "service_sequence", allocationSize = 1)
@@ -55,6 +57,13 @@ public class ServiceNinjaOne implements AbstractEntity<Long>, OperatingSystemIdI
         }
 
         public ServiceNinjaOne(String serviceName, String operatingSystemId, double servicePrice) {
+                this.serviceName = serviceName;
+                this.operatingSystem = new OperatingSystem(operatingSystemId);
+                this.servicePrice = servicePrice;
+        }
+
+        public ServiceNinjaOne(Long id, String serviceName, String operatingSystemId, double servicePrice) {
+                this.id = id;
                 this.serviceName = serviceName;
                 this.operatingSystem = new OperatingSystem(operatingSystemId);
                 this.servicePrice = servicePrice;

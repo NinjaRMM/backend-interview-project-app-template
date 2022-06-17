@@ -9,10 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ninjaone.backendinterviewproject.dto.DeviceDTO;
@@ -26,9 +26,9 @@ public class DeviceController {
     @Autowired
     DeviceServiceInterface deviceServiceInterface;
 
-    @PostMapping("/{id}")
+    @PostMapping("")
     public ResponseEntity<DeviceDTO> addDeviceToCustomer(@RequestBody DeviceDTO device,
-            @PathVariable String customerId) {
+    @RequestParam String customerId) {
         try {
             DeviceNinjaOne deviceNinjaOne = deviceServiceInterface.addDeviceToCustomer(
                     new DeviceNinjaOne(device.getSystemName(), device.getOperatingSystemType(), customerId),
@@ -41,7 +41,7 @@ public class DeviceController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Iterable<DeviceDTO>> findAllDeviceOfCustomer(@PathVariable String customerId) {
+    public ResponseEntity<Iterable<DeviceDTO>> findAllDeviceOfCustomer(@RequestParam String customerId) {
         try {
             List<DeviceNinjaOne> device = deviceServiceInterface.findAllDeviceOfCustomer(customerId);
             Collection<DeviceDTO> deviceDTOCollection = new ArrayList<>();
@@ -57,8 +57,8 @@ public class DeviceController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Long> deleteServiceOfCustomer(@PathVariable Long deviceId) {
+    @DeleteMapping("")
+    public ResponseEntity<Long> deleteServiceOfCustomer(@RequestParam Long deviceId) {
         try {
             deviceServiceInterface.deleteDeviceOfCustomer(deviceId);
             return new ResponseEntity<>(deviceId, HttpStatus.OK);

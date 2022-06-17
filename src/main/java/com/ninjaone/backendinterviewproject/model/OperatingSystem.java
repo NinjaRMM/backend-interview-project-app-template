@@ -7,11 +7,13 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "operating_system")
 @AllArgsConstructor
+@NoArgsConstructor
 public class OperatingSystem implements AbstractEntity<String> {
 
         @Id

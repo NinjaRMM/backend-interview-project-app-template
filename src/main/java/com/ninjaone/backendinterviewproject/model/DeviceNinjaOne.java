@@ -17,6 +17,7 @@ import com.ninjaone.backendinterviewproject.model.interfaces.OperatingSystemIdIn
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 @Table(name = "device_ninja_one")
 @AllArgsConstructor
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 public class DeviceNinjaOne implements AbstractEntity<Long>, OperatingSystemIdInterface {
     @Id
     @SequenceGenerator(

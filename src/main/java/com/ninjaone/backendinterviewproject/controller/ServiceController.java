@@ -1,8 +1,7 @@
 package com.ninjaone.backendinterviewproject.controller;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ninjaone.backendinterviewproject.dto.ServiceDTO;
@@ -25,12 +25,12 @@ public class ServiceController {
     @Autowired
     ServiceServiceInterface serviceServiceInterface;
 
-    @PostMapping("/{id}")
-    public ResponseEntity<ServiceDTO> addServiceToCustomer(@PathVariable Long serviceId,
-            @PathVariable String customerId) {
+    @PostMapping("")
+    public ResponseEntity<ServiceDTO> addServiceToCustomer(@RequestParam  Long serviceId,
+            @RequestParam String customerId) {
         try {
             ServiceNinjaOne serviceNinjaOne = serviceServiceInterface.addServiceToCustomer(serviceId, customerId);
-            ServiceDTO serviceDTO = new ServiceDTO(serviceNinjaOne.getId(), serviceNinjaOne.getServiceName(),
+            ServiceDTO serviceDTO = new ServiceDTO(serviceNinjaOne.getId(), serviceNinjaOne.getServiceName(),serviceNinjaOne.getOperatingSystemId(),
                     serviceNinjaOne.getServicePrice());
             return new ResponseEntity<>(serviceDTO, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -39,13 +39,13 @@ public class ServiceController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Iterable<ServiceDTO>> findAllServiceOfCustomer(@PathVariable String customerId) {
+    public ResponseEntity<Iterable<ServiceDTO>> findAllServiceOfCustomer(@RequestParam String customerId) {
         try {
-            List<ServiceNinjaOne> services = serviceServiceInterface.findAllServiceOfCustomer(customerId);
-            Collection<ServiceDTO> serviceDTOCollection = new ArrayList<>();
+            Set<ServiceNinjaOne> services = serviceServiceInterface.findAllServiceOfCustomer(customerId);
+            Set<ServiceDTO> serviceDTOCollection = new HashSet<>();
             services.forEach(serviceNinjaOne -> 
                 serviceDTOCollection.add(
-                        new ServiceDTO(serviceNinjaOne.getId(), serviceNinjaOne.getServiceName(),
+                        new ServiceDTO(serviceNinjaOne.getId(), serviceNinjaOne.getServiceName(),serviceNinjaOne.getOperatingSystemId(),
                                 serviceNinjaOne.getServicePrice()))
             );
 
@@ -55,9 +55,9 @@ public class ServiceController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Long> deleteServiceOfCustomer(@PathVariable Long serviceId,
-            @PathVariable String customerId) {
+    @DeleteMapping("")
+    public ResponseEntity<Long> deleteServiceOfCustomer(@RequestParam Long serviceId,
+            @RequestParam String customerId) {
         try {
             serviceServiceInterface.deleteServiceOfCustomer(serviceId, customerId);
             return new ResponseEntity<>(serviceId, HttpStatus.OK);

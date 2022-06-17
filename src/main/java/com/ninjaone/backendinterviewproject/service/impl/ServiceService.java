@@ -1,6 +1,6 @@
 package com.ninjaone.backendinterviewproject.service.impl;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,9 +42,9 @@ public class ServiceService implements ServiceServiceInterface {
     }
 
     @Override
-    public List<ServiceNinjaOne> findAllServiceOfCustomer(String customerId) {
+    public Set<ServiceNinjaOne> findAllServiceOfCustomer(String customerId) {
         Customer customer = customerServiceInterface.findById(customerId);
-        return List.copyOf(customer.getServices());
+        return customer.getServices();
     }
 
     @Override
