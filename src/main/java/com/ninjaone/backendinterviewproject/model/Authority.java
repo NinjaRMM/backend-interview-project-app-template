@@ -13,10 +13,12 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "authority")
+@NoArgsConstructor
 public class Authority implements GrantedAuthority{
 
     @Id

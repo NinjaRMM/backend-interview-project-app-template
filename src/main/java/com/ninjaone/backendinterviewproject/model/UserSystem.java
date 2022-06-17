@@ -13,11 +13,15 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "user_system")
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserSystem implements AbstractEntity<String>  {
     @Id
     @Column(name = "username", updatable = false)
@@ -36,5 +40,10 @@ public class UserSystem implements AbstractEntity<String>  {
     @Override
     public String getId() {
         return username;
+    }
+
+    public UserSystem(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 }
