@@ -43,11 +43,11 @@ public class ServiceController {
         try {
             List<ServiceNinjaOne> services = serviceServiceInterface.findAllServiceOfCustomer(customerId);
             Collection<ServiceDTO> serviceDTOCollection = new ArrayList<>();
-            services.forEach(serviceNinjaOne -> {
+            services.forEach(serviceNinjaOne -> 
                 serviceDTOCollection.add(
                         new ServiceDTO(serviceNinjaOne.getId(), serviceNinjaOne.getServiceName(),
-                                serviceNinjaOne.getServicePrice()));
-            });
+                                serviceNinjaOne.getServicePrice()))
+            );
 
             return new ResponseEntity<>(serviceDTOCollection, HttpStatus.OK);
         } catch (Exception e) {
@@ -59,10 +59,11 @@ public class ServiceController {
     public ResponseEntity<Long> deleteServiceOfCustomer(@PathVariable Long serviceId,
             @PathVariable String customerId) {
         try {
-            serviceServiceInterface.deleteServiceOfCustomer(serviceId,customerId);
+            serviceServiceInterface.deleteServiceOfCustomer(serviceId, customerId);
             return new ResponseEntity<>(serviceId, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/cost/{customerId}")

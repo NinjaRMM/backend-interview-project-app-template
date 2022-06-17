@@ -3,6 +3,7 @@ package com.ninjaone.backendinterviewproject.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ninjaone.backendinterviewproject.exception.GenericException;
 import com.ninjaone.backendinterviewproject.model.Customer;
@@ -12,6 +13,7 @@ import com.ninjaone.backendinterviewproject.service.api.CustomerServiceInterface
 import com.ninjaone.backendinterviewproject.service.api.DeviceNinjaOneServiceInterface;
 import com.ninjaone.backendinterviewproject.service.api.DeviceServiceInterface;
 
+@Service
 public class DeviceService implements DeviceServiceInterface {
 
     @Autowired

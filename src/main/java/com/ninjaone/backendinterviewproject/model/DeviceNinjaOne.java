@@ -63,4 +63,11 @@ public DeviceNinjaOne(String systemName, String operatingSystemTypeId, String cu
         this.operatingSystemType = new OperatingSystemType(operatingSystemTypeId);
         this.customer = new Customer(customerId);
 }
+
+
+public DeviceNinjaOne(String systemName, String operatingSystemTypeId,  String operatingSystemId,  String customerId) {
+        this.systemName = systemName;
+        this.operatingSystemType = new OperatingSystemType(operatingSystemTypeId, operatingSystemId);
+        this.customer = new Customer(customerId);
+}
 }

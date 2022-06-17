@@ -3,6 +3,7 @@ package com.ninjaone.backendinterviewproject.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ninjaone.backendinterviewproject.model.Customer;
 import com.ninjaone.backendinterviewproject.model.ServiceNinjaOne;
@@ -11,6 +12,7 @@ import com.ninjaone.backendinterviewproject.service.api.CustomerServiceInterface
 import com.ninjaone.backendinterviewproject.service.api.ServiceNinjaOneServiceInterface;
 import com.ninjaone.backendinterviewproject.service.api.ServiceServiceInterface;
 
+@Service
 public class ServiceService implements ServiceServiceInterface {
 
     @Autowired
