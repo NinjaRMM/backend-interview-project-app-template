@@ -2,19 +2,23 @@ package com.ninjaone.backendinterviewproject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.ninjaone.backendinterviewproject.exception.GenericException;
 import com.ninjaone.backendinterviewproject.model.Authority;
 import com.ninjaone.backendinterviewproject.model.Customer;
 import com.ninjaone.backendinterviewproject.model.DeviceNinjaOne;
+import com.ninjaone.backendinterviewproject.model.ServiceNinjaOne;
 import com.ninjaone.backendinterviewproject.model.UserSystem;
 import com.ninjaone.backendinterviewproject.service.api.CustomerServiceInterface;
-import com.ninjaone.backendinterviewproject.service.api.ServiceServiceInterface;
+import com.ninjaone.backendinterviewproject.service.api.ServiceNinjaOneServiceInterface;
 import com.ninjaone.backendinterviewproject.service.api.UserSystemServiceInterface;
 
 @SpringBootApplication
@@ -29,7 +33,7 @@ public class BackendInterviewProjectApplication {
 
 	@Bean
 	CommandLineRunner commandLineRunner(UserSystemServiceInterface userSystemServiceInterface,
-			CustomerServiceInterface customerServiceInterface, ServiceServiceInterface serviceServiceInterface) {
+			CustomerServiceInterface customerServiceInterface, ServiceNinjaOneServiceInterface serviceNinjaOneServiceInterface) {
 		return args -> {
 			// user system creation
 			UserSystem userSystemCustomer = new UserSystem("customer", "customer");
@@ -50,6 +54,25 @@ public class BackendInterviewProjectApplication {
 			Customer customer = new Customer(customerId);
 			customer.setDevices(listOfDeviceNinjaOne);
 			customerServiceInterface.create(customer);
+
+	// service creation
+			Set<ServiceNinjaOne> listOfServiceNinjaOne = new HashSet<>();
+			listOfServiceNinjaOne.add(new ServiceNinjaOne("DEVICE", "GENERIC", 4.00));
+			listOfServiceNinjaOne.add(new ServiceNinjaOne("ANTIVIRUS", "MICROSOFT WINDOWS", 5.00));
+			listOfServiceNinjaOne.add(new ServiceNinjaOne("ANTIVIRUS", "APPLE MACOS", 7.00));
+			listOfServiceNinjaOne.add(new ServiceNinjaOne("BACKUP", "GENERIC", 3.00));
+			listOfServiceNinjaOne.add(new ServiceNinjaOne("PSA", "GENERIC", 2.00));
+			listOfServiceNinjaOne.add(new ServiceNinjaOne("SCREEN SHARE", "GENERIC", 1.00));
+
+			listOfServiceNinjaOne.stream().forEach(elem -> {
+				try {
+					serviceNinjaOneServiceInterface.create(elem);
+				} catch (GenericException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+
 		};
 	}
 }

@@ -30,7 +30,7 @@ public class AbstractController<T, K, S extends AbstractServiceInterface<T, K>> 
 
     @GetMapping("")
     public ResponseEntity<List<T>> findAll(Pageable pageable) {
-        return ResponseEntity.ok(service.findAll(pageable));
+        return ResponseEntity.ok((service.findAll(pageable)));
     }
 
     @GetMapping("/{id}")

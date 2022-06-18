@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,5 +20,6 @@ public class OperatingSystem implements AbstractEntity<String> {
 
         @Id
         @Column(name = "operating_system_id")
+        @JsonProperty("id")
         private String id;
 }

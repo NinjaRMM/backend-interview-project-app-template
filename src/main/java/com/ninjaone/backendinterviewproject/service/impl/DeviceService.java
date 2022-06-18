@@ -29,8 +29,7 @@ public class DeviceService implements DeviceServiceInterface {
     public DeviceNinjaOne addDeviceToCustomer(DeviceNinjaOne deviceNinjaOne, String customerId) throws GenericException {
         Customer customer = customerServiceInterface.findById(customerId);
         deviceNinjaOne.setCustomer(customer);
-        deviceNinjaOneServiceInterface.create(deviceNinjaOne);
-        return deviceNinjaOne;
+        return deviceNinjaOneServiceInterface.create(deviceNinjaOne);
     }
 
     @Override

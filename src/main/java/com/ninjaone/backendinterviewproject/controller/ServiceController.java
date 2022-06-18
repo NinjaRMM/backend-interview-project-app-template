@@ -1,6 +1,5 @@
 package com.ninjaone.backendinterviewproject.controller;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ninjaone.backendinterviewproject.dto.ServiceDTO;
 import com.ninjaone.backendinterviewproject.model.ServiceNinjaOne;
 import com.ninjaone.backendinterviewproject.service.api.ServiceServiceInterface;
 
@@ -26,30 +24,21 @@ public class ServiceController {
     ServiceServiceInterface serviceServiceInterface;
 
     @PostMapping("")
-    public ResponseEntity<ServiceDTO> addServiceToCustomer(@RequestParam  Long serviceId,
+    public ResponseEntity<ServiceNinjaOne> addServiceToCustomer(@RequestParam Long serviceId,
             @RequestParam String customerId) {
         try {
             ServiceNinjaOne serviceNinjaOne = serviceServiceInterface.addServiceToCustomer(serviceId, customerId);
-            ServiceDTO serviceDTO = new ServiceDTO(serviceNinjaOne.getId(), serviceNinjaOne.getServiceName(),serviceNinjaOne.getOperatingSystemId(),
-                    serviceNinjaOne.getServicePrice());
-            return new ResponseEntity<>(serviceDTO, HttpStatus.CREATED);
+            return new ResponseEntity<>(serviceNinjaOne, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("")
-    public ResponseEntity<Iterable<ServiceDTO>> findAllServiceOfCustomer(@RequestParam String customerId) {
+    public ResponseEntity<Iterable<ServiceNinjaOne>> findAllServiceOfCustomer(@RequestParam String customerId) {
         try {
             Set<ServiceNinjaOne> services = serviceServiceInterface.findAllServiceOfCustomer(customerId);
-            Set<ServiceDTO> serviceDTOCollection = new HashSet<>();
-            services.forEach(serviceNinjaOne -> 
-                serviceDTOCollection.add(
-                        new ServiceDTO(serviceNinjaOne.getId(), serviceNinjaOne.getServiceName(),serviceNinjaOne.getOperatingSystemId(),
-                                serviceNinjaOne.getServicePrice()))
-            );
-
-            return new ResponseEntity<>(serviceDTOCollection, HttpStatus.OK);
+            return new ResponseEntity<>(services, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

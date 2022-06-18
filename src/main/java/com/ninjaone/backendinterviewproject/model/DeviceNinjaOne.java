@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ninjaone.backendinterviewproject.model.interfaces.OperatingSystemIdInterface;
 
 import lombok.AccessLevel;
@@ -28,48 +30,48 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 public class DeviceNinjaOne implements AbstractEntity<Long>, OperatingSystemIdInterface {
-    @Id
-    @SequenceGenerator(
-            name = "device_sequence",
-            sequenceName = "device_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = SEQUENCE,
-            generator = "device_sequence"
-    )
-    @Column(name = "device_id",
-            updatable = false)
-    private Long id;
+        @Id
+        @SequenceGenerator(name = "device_sequence", sequenceName = "device_sequence", allocationSize = 1)
+        @GeneratedValue(strategy = SEQUENCE, generator = "device_sequence")
+        @Column(name = "device_id", updatable = false)
+        @JsonProperty("id")
+        private Long id;
 
-    @NonNull
-    @Column(name = "system_name")
-    private String systemName;
+        @NonNull
+        @Column(name = "system_name")
+        @JsonProperty("systemName")
+        private String systemName;
 
-    @NonNull
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private OperatingSystemType operatingSystemType;
+        @NonNull
+        @ManyToOne
+        @JoinColumn(nullable = false)
+        @JsonProperty("operatingSystemType")
+        private OperatingSystemType operatingSystemType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", nullable = false, updatable = false)
-    private Customer customer;
+        @ManyToOne(fetch = FetchType.EAGER)
+        @JoinColumn(name = "customer_id", nullable = false, updatable = false)
+        @JsonProperty("customer")
+        private Customer customer;
 
-    @Override
-    public String getOperatingSystemId() {
-        return getOperatingSystemType().getOperatingSystem().getId();
-}
+        @Override
+        @JsonIgnore
+        public String getOperatingSystemId() {
+                if (getOperatingSystemType().getOperatingSystem() != null)
+                        return getOperatingSystemType().getOperatingSystem().getId();
 
-public DeviceNinjaOne(String systemName, String operatingSystemTypeId, String customerId) {
-        this.systemName = systemName;
-        this.operatingSystemType = new OperatingSystemType(operatingSystemTypeId);
-        this.customer = new Customer(customerId);
-}
+                return "";
+        }
 
+        public DeviceNinjaOne(String systemName, String operatingSystemTypeId, String customerId) {
+                this.systemName = systemName;
+                this.operatingSystemType = new OperatingSystemType(operatingSystemTypeId);
+                this.customer = new Customer(customerId);
+        }
 
-public DeviceNinjaOne(String systemName, String operatingSystemTypeId,  String operatingSystemId,  String customerId) {
-        this.systemName = systemName;
-        this.operatingSystemType = new OperatingSystemType(operatingSystemTypeId, operatingSystemId);
-        this.customer = new Customer(customerId);
-}
+        public DeviceNinjaOne(String systemName, String operatingSystemTypeId, String operatingSystemId,
+                        String customerId) {
+                this.systemName = systemName;
+                this.operatingSystemType = new OperatingSystemType(operatingSystemTypeId, operatingSystemId);
+                this.customer = new Customer(customerId);
+        }
 }

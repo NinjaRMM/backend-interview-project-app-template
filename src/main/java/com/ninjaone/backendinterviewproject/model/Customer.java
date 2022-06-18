@@ -6,12 +6,16 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -29,12 +33,15 @@ public class Customer implements AbstractEntity<String> {
     @NonNull
     @Id
     @Column(name = "customer_id")
+    @JsonProperty("id")
     private String id;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    @JsonIgnore
     private List<DeviceNinjaOne> devices;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "customer_service", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
+    @JsonIgnore
     private Set<ServiceNinjaOne> services;
 }

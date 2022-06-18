@@ -1,7 +1,5 @@
 package com.ninjaone.backendinterviewproject.controller;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ninjaone.backendinterviewproject.dto.DeviceDTO;
 import com.ninjaone.backendinterviewproject.model.DeviceNinjaOne;
 import com.ninjaone.backendinterviewproject.service.api.DeviceServiceInterface;
 
@@ -27,13 +24,13 @@ public class DeviceController {
     DeviceServiceInterface deviceServiceInterface;
 
     @PostMapping("")
-    public ResponseEntity<DeviceDTO> addDeviceToCustomer(@RequestBody DeviceDTO device,
+    public ResponseEntity<DeviceNinjaOne> addDeviceToCustomer(@RequestBody DeviceNinjaOne device,
     @RequestParam String customerId) {
         try {
             DeviceNinjaOne deviceNinjaOne = deviceServiceInterface.addDeviceToCustomer(
-                    new DeviceNinjaOne(device.getSystemName(), device.getOperatingSystemType(), customerId),
+                    new DeviceNinjaOne(device.getSystemName(), device.getOperatingSystemType().getId(), customerId),
                     customerId);
-            device.setDeviceId(deviceNinjaOne.getId());
+            device.setId(deviceNinjaOne.getId());
             return new ResponseEntity<>(device, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -41,17 +38,11 @@ public class DeviceController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Iterable<DeviceDTO>> findAllDeviceOfCustomer(@RequestParam String customerId) {
+    public ResponseEntity<Iterable<DeviceNinjaOne>> findAllDeviceOfCustomer(@RequestParam String customerId) {
         try {
-            List<DeviceNinjaOne> device = deviceServiceInterface.findAllDeviceOfCustomer(customerId);
-            Collection<DeviceDTO> deviceDTOCollection = new ArrayList<>();
-            device.forEach(deviceNinjaOne -> {
-                deviceDTOCollection.add(
-                        new DeviceDTO(deviceNinjaOne.getId(), deviceNinjaOne.getSystemName(),
-                                deviceNinjaOne.getOperatingSystemType().getId()));
-            });
+            List<DeviceNinjaOne> devices = deviceServiceInterface.findAllDeviceOfCustomer(customerId);
 
-            return new ResponseEntity<>(deviceDTOCollection, HttpStatus.OK);
+            return new ResponseEntity<>(devices, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
