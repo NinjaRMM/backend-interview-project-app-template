@@ -46,29 +46,10 @@ public class BackendInterviewProjectApplication {
 			listOfDeviceNinjaOne.add(new DeviceNinjaOne("PC03", "MAC", "APPLE MACOS", "12345"));
 			listOfDeviceNinjaOne.add(new DeviceNinjaOne("PC04", "MAC", "APPLE MACOS", "12345"));
 			listOfDeviceNinjaOne.add(new DeviceNinjaOne("PC05", "MAC", "APPLE MACOS", "12345"));
-			/* 
-			Set<ServiceNinjaOne> listOfServiceNinjaOne = new HashSet<>();
-			listOfServiceNinjaOne.add(new ServiceNinjaOne(Long.valueOf(1),"DEVICE", "GENERIC", 4.00));
-			listOfServiceNinjaOne.add(new ServiceNinjaOne(Long.valueOf(2),"ANTIVIRUS", "MICROSOFT WINDOWS", 5.00));
-			listOfServiceNinjaOne.add(new ServiceNinjaOne(Long.valueOf(3),"ANTIVIRUS", "APPLE MACOS", 7.00));
-			listOfServiceNinjaOne.add(new ServiceNinjaOne(Long.valueOf(4),"BACKUP", "GENERIC", 3.00));
-			listOfServiceNinjaOne.add(new ServiceNinjaOne(Long.valueOf(6),"SCREEN SHARE", "GENERIC", 1.00));
-			*/
+
 			Customer customer = new Customer(customerId);
 			customer.setDevices(listOfDeviceNinjaOne);
-			//customer.setServices(listOfServiceNinjaOne);
 			customerServiceInterface.create(customer);
-
-			// add service to customer
-			/* 
-			serviceServiceInterface.addServiceToCustomer(Long.valueOf(1), customer.getId());
-			serviceServiceInterface.addServiceToCustomer(Long.valueOf(2), customer.getId());
-			serviceServiceInterface.addServiceToCustomer(Long.valueOf(3), customer.getId());
-			serviceServiceInterface.addServiceToCustomer(Long.valueOf(4), customer.getId());
-			serviceServiceInterface.addServiceToCustomer(Long.valueOf(6), customer.getId());
-			*/
-
-
 		};
 	}
 }
