@@ -4,7 +4,7 @@ The project is configured to use an in-memory H2 database that is volatile. If y
 
 
 ## Pre-requisites
-- Java runtime version 1.9 or later
+- Java runtime version 11 or later
 - Gradle version 4.x
 
 ## Starting the Application
