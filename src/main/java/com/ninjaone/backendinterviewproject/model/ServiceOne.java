@@ -4,22 +4,23 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Sample {
+public class ServiceOne {
     @Id
     private String id;
-    private String value;
+    private String serviceName;
 
-    public Sample(){}
-    public Sample(String id, String value) {
+    public ServiceOne(){}
+    public ServiceOne(String id, String serviceName) {
         this.id = id;
-        this.value = value;
+        this.serviceName = serviceName;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getValue() {
-        return value;
+    public String getServiceName() {
+        return serviceName;
     }
+
 }
