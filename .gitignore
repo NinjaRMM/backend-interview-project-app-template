@@ -54,3 +54,6 @@ Thumbs.db
 *.mov
 *.wmv
 
+out/production/resources/application.yml
+out/production/resources/data.sql
+out/test/resources/application-test.yml
