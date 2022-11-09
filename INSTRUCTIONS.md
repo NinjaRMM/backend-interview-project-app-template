@@ -26,15 +26,16 @@ Devices have the following properties:
 
 ## Feature Requirements
 
-- Create a simple data model for Devices and the Services associated with them.
+- Implement a simple data model and persistence for Devices and the Services associated with them.
 - Implement endpoints and logic for the following.
   - Add, Delete (no edits) for Devices. Duplicate Devices should not be allowed.
   - Add, Delete (no edits) for Services and their cost. Duplicate Services should not be
   allowed.
   - Add, Delete (no edits) for Services assigned to a Device.
   - Calculate the total cost of the services depending on Services used by a Device.
-    &emsp;&emsp;&emsp;Example:  
-    Customer with 2 Windows and 3 Mac, with the following services:
+
+    **Example**:  
+    Customer with 2 Windows and 3 Macs, with the following Services:
 
     | Device Type | Antivirus | Backup | Screen Share |
     |-------------|-----------|--------|--------------|
@@ -44,10 +45,10 @@ Devices have the following properties:
 
     **Total Cost:** $64   
     Explanation:  
-    &emsp;&emsp;&emsp;Devices cost: $20  
-    &emsp;&emsp;&emsp;Antivirus cost: $31  
-    &emsp;&emsp;&emsp;Backup: $9  
-    &emsp;&emsp;&emsp;Screen Share: $4 
+    &nbsp;&nbsp;Devices cost: $20  
+    &nbsp;&nbsp;Antivirus cost: $31  
+    &nbsp;&nbsp;Backup: $9  
+    &nbsp;&nbsp;Screen Share: $4 
 - Implement a rudimentary cache for the calculation per device. Note that the cache must
 be re-evaluated any time a service is added to a Device.
 
