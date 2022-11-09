@@ -53,7 +53,7 @@ be re-evaluated any time a service is added to a Device.
 
 ## Instructions
 
-Using the provided [Project Template](README.md) or from scratch, implement the service as described in *Feature
+Using the provided [Project Template](https://github.com/NinjaRMM/backend-interview-project-app-template) or from scratch, implement the service as described in *Feature
 Requirements*
 
 ## Project Template
