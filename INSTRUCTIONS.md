@@ -41,6 +41,7 @@ Devices have the following properties:
     | Windows     | 2         | 1      | 2            |
     | Mac         | 3         | 2      | 2            |
     | **Total**   | **31**    | **9**  | **4**        |
+
     **Total Cost:** $64   
     Explanation:  
     &emsp;&emsp;&emsp;Devices cost: $20  
