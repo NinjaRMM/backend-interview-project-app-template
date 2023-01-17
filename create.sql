@@ -1,0 +1,2 @@
+--create table device (id bigint not null, type varchar(255), primary key (id));
+--create table sample (id varchar(255) not null, value varchar(255), primary key (id));
