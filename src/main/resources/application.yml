@@ -14,3 +14,6 @@ spring:
         enabled: true
         settings:
           web-allow-others: false
+server:
+  servlet:
+    contextPath: /api
