@@ -5,10 +5,10 @@ import com.ninjaone.backendinterviewproject.dto.output.CostsByDeviceResponseDto;
 import com.ninjaone.backendinterviewproject.dto.output.RmmServiceExecutionResponseDto;
 import com.ninjaone.backendinterviewproject.exception.ResourceNotFoundException;
 import com.ninjaone.backendinterviewproject.service.RmmServiceExecutionService;
-import com.ninjaone.backendinterviewproject.service.RmmServiceService;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,21 +23,17 @@ public class RmmServiceExecutionController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
+    @CacheEvict(value = "calculateValuesByDevice", allEntries = true)
     public RmmServiceExecutionResponseDto addService(@RequestBody RmmServiceExecutionRequestDto serviceRequestDto) {
         return rmmServiceExecutionService.create(serviceRequestDto);
     }
 
     @GetMapping("/calculate-by-device/{deviceId}")
     @ResponseStatus(HttpStatus.OK)
+    @Cacheable(value = "calculateValuesByDevice")
     public CostsByDeviceResponseDto calculateCostsByDeviceId(@PathVariable() Long deviceId) {
         return rmmServiceExecutionService.calculateCostsByDeviceId(deviceId);
     }
-//
-//    @GetMapping("/{id}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public RmmServiceExecutionResponseDto getServicesByDeviceType(@PathVariable String deviceType) {
-//        return rmmServiceService.getByDeviceType(deviceType);
-//    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

@@ -17,3 +17,9 @@ spring:
 server:
   servlet:
     contextPath: /api
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
