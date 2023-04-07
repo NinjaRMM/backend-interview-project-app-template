@@ -16,19 +16,19 @@ public class SampleController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private Sample postSampleEntity(@RequestBody Sample sample){
+    private Sample postSampleEntity(@RequestBody Sample sample) {
         return sampleService.saveSampleEntity(sample);
     }
 
     @GetMapping("/{id}")
-    private Sample getSampleEntity(@PathVariable String id){
+    private Sample getSampleEntity(@PathVariable String id) {
         return sampleService.getSampleEntity(id)
                 .orElseThrow();
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    private void deleteSampleEntity(@PathVariable String id){
+    private void deleteSampleEntity(@PathVariable String id) {
         sampleService.deleteSampleEntity(id);
     }
 }

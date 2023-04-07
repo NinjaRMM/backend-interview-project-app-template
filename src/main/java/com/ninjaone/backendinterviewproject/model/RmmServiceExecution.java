@@ -1,7 +1,5 @@
 package com.ninjaone.backendinterviewproject.model;
 
-import com.ninjaone.backendinterviewproject.dto.output.CostsByDeviceResponseDto;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;

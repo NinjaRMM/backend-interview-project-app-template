@@ -9,7 +9,9 @@ public class Sample {
     private String id;
     private String value;
 
-    public Sample(){}
+    public Sample() {
+    }
+
     public Sample(String id, String value) {
         this.id = id;
         this.value = value;

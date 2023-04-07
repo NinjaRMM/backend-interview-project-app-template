@@ -6,7 +6,6 @@ import com.ninjaone.backendinterviewproject.exception.ResourceNotFoundException;
 import com.ninjaone.backendinterviewproject.service.RmmServiceService;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

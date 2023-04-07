@@ -1,15 +1,12 @@
 package com.ninjaone.backendinterviewproject.service.impl;
 
 import com.ninjaone.backendinterviewproject.database.RmmServiceExecutionRepository;
-import com.ninjaone.backendinterviewproject.database.RmmServiceRepository;
 import com.ninjaone.backendinterviewproject.dto.input.RmmServiceExecutionRequestDto;
-import com.ninjaone.backendinterviewproject.dto.input.RmmServiceRequestDto;
 import com.ninjaone.backendinterviewproject.dto.output.CostsByDeviceResponseDto;
 import com.ninjaone.backendinterviewproject.dto.output.DeviceResponseDto;
 import com.ninjaone.backendinterviewproject.dto.output.RmmServiceExecutionResponseDto;
 import com.ninjaone.backendinterviewproject.dto.output.RmmServiceResponseDto;
 import com.ninjaone.backendinterviewproject.exception.BadRequestException;
-import com.ninjaone.backendinterviewproject.exception.ConflictException;
 import com.ninjaone.backendinterviewproject.exception.ResourceNotFoundException;
 import com.ninjaone.backendinterviewproject.model.Device;
 import com.ninjaone.backendinterviewproject.model.RmmService;
@@ -19,8 +16,6 @@ import com.ninjaone.backendinterviewproject.service.RmmServiceExecutionService;
 import com.ninjaone.backendinterviewproject.service.RmmServiceService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.PersistenceException;
 
 @Service
 public class RmmServiceExecutionServiceImpl implements RmmServiceExecutionService {
