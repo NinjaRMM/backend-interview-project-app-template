@@ -1,6 +1,7 @@
 package com.ninjaone.backendinterviewproject.controller;
 
 import com.ninjaone.backendinterviewproject.dto.input.ServiceRequestDto;
+import com.ninjaone.backendinterviewproject.dto.output.DeviceResponseDto;
 import com.ninjaone.backendinterviewproject.dto.output.ServiceResponseDto;
 import com.ninjaone.backendinterviewproject.exception.ResourceNotFoundException;
 import com.ninjaone.backendinterviewproject.service.ServiceService;
@@ -8,7 +9,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/service")
@@ -28,7 +28,7 @@ public class ServiceController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ServiceResponseDto getServiceById(@PathVariable Long id) {
+    public DeviceResponseDto getServiceById(@PathVariable Long id) {
         return serviceService.getById(id);
     }
 
