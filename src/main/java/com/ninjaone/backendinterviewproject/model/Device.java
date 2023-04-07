@@ -1,6 +1,7 @@
 package com.ninjaone.backendinterviewproject.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "device", uniqueConstraints = {
@@ -9,7 +10,7 @@ import javax.persistence.*;
 public class Device {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -19,6 +20,9 @@ public class Device {
     @Enumerated(EnumType.STRING)
     @Column(name = "device_type", nullable = false, length = 50)
     private DeviceType deviceType;
+
+    @OneToMany(mappedBy = "device", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<RmmServiceExecution> rmmServiceExecutionList;
 
     public String getSystemName() {
         return systemName;

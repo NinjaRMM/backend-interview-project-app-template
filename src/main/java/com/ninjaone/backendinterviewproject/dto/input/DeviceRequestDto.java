@@ -4,23 +4,25 @@ import com.ninjaone.backendinterviewproject.model.DeviceType;
 
 public class DeviceRequestDto {
 
-    private String systemName;
-    private DeviceType deviceType;
+    private final Integer id = null;
+    private final String systemName;
+    private final DeviceType deviceType;
+
+    public DeviceRequestDto(String systemName, DeviceType deviceType) {
+        this.systemName = systemName;
+        this.deviceType = deviceType;
+    }
+
+    public Integer getId() {
+        return id;
+    }
 
     public String getSystemName() {
         return systemName;
     }
 
-    public void setSystemName(String systemName) {
-        this.systemName = systemName;
-    }
-
     public DeviceType getDeviceType() {
         return deviceType;
-    }
-
-    public void setDeviceType(DeviceType deviceType) {
-        this.deviceType = deviceType;
     }
 }
 

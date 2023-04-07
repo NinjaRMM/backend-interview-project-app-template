@@ -8,7 +8,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/device")
@@ -20,7 +19,7 @@ public class DeviceController {
         this.deviceService = deviceService;
     }
 
-    @PostMapping("/add")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public DeviceResponseDto addDevice(@RequestBody DeviceRequestDto deviceRequestDto) {
         return deviceService.create(deviceRequestDto);
@@ -33,11 +32,10 @@ public class DeviceController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Void> removeDevice(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeDevice(@PathVariable Long id) {
         try {
             deviceService.deleteById(id);
-            return ResponseEntity.ok().build();
         } catch (EmptyResultDataAccessException ex) {
             throw new ResourceNotFoundException("Device with ID " + id + " not found.");
         }

@@ -6,15 +6,6 @@ public class DeviceResponseDto {
     private String systemName;
     private String deviceType;
 
-    public DeviceResponseDto() {
-    }
-
-    public DeviceResponseDto(Long id, String systemName, String deviceType) {
-        this.id = id;
-        this.systemName = systemName;
-        this.deviceType = deviceType;
-    }
-
     public Long getId() {
         return id;
     }
