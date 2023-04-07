@@ -37,7 +37,8 @@ public class RmmServiceExecutionController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removeService(@PathVariable Long id) {
+    @CacheEvict(value = "calculateValuesByDevice", allEntries = true)
+    public void removeServiceExecution(@PathVariable Long id) {
         try {
             rmmServiceExecutionService.deleteById(id);
         } catch (EmptyResultDataAccessException ex) {
