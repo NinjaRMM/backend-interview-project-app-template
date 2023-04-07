@@ -2,13 +2,33 @@ package com.ninjaone.backendinterviewproject.dto.input;
 
 import com.ninjaone.backendinterviewproject.model.DeviceType;
 
-public class ServiceRequestDto {
+public class RmmServiceRequestDto {
 
-    private Float cost;
-    private String name;
-    private DeviceType deviceType;
+    private final Integer id = null;
+    private final Float cost;
+    private final String name;
+    private final DeviceType deviceType;
 
+    public RmmServiceRequestDto(Float cost, String name, DeviceType deviceType) {
+        this.cost = cost;
+        this.name = name;
+        this.deviceType = deviceType;
+    }
 
+    public Integer getId() {
+        return id;
+    }
 
+    public Float getCost() {
+        return cost;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public DeviceType getDeviceType() {
+        return deviceType;
+    }
 }
 

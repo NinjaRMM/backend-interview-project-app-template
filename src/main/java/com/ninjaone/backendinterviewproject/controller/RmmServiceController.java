@@ -1,10 +1,9 @@
 package com.ninjaone.backendinterviewproject.controller;
 
-import com.ninjaone.backendinterviewproject.dto.input.ServiceRequestDto;
-import com.ninjaone.backendinterviewproject.dto.output.DeviceResponseDto;
-import com.ninjaone.backendinterviewproject.dto.output.ServiceResponseDto;
+import com.ninjaone.backendinterviewproject.dto.input.RmmServiceRequestDto;
+import com.ninjaone.backendinterviewproject.dto.output.RmmServiceResponseDto;
 import com.ninjaone.backendinterviewproject.exception.ResourceNotFoundException;
-import com.ninjaone.backendinterviewproject.service.ServiceService;
+import com.ninjaone.backendinterviewproject.service.RmmServiceService;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,32 +11,31 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/service")
-public class ServiceController {
+public class RmmServiceController {
 
-    private final ServiceService serviceService;
+    private final RmmServiceService rmmServiceService;
 
-    public ServiceController(ServiceService serviceService) {
-        this.serviceService = serviceService;
+    public RmmServiceController(RmmServiceService rmmServiceService) {
+        this.rmmServiceService = rmmServiceService;
     }
 
-    @PostMapping("/add")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ServiceResponseDto addService(@RequestBody ServiceRequestDto serviceRequestDto) {
-        return serviceService.create(serviceRequestDto);
+    public RmmServiceResponseDto addService(@RequestBody RmmServiceRequestDto rmmServiceRequestDto) {
+        return rmmServiceService.create(rmmServiceRequestDto);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public DeviceResponseDto getServiceById(@PathVariable Long id) {
-        return serviceService.getById(id);
+    public RmmServiceResponseDto getServiceById(@PathVariable Long id) {
+        return rmmServiceService.getById(id);
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Void> removeService(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeRmmService(@PathVariable Long id) {
         try {
-            serviceService.deleteById(id);
-            return ResponseEntity.ok().build();
+            rmmServiceService.deleteById(id);
         } catch (EmptyResultDataAccessException ex) {
             throw new ResourceNotFoundException("Service with ID " + id + " not found.");
         }

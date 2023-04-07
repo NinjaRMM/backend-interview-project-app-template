@@ -1,16 +1,15 @@
 package com.ninjaone.backendinterviewproject.service;
 
-import com.ninjaone.backendinterviewproject.dto.input.ServiceRequestDto;
-import com.ninjaone.backendinterviewproject.dto.output.DeviceResponseDto;
-import com.ninjaone.backendinterviewproject.dto.output.ServiceResponseDto;
+import com.ninjaone.backendinterviewproject.dto.input.RmmServiceRequestDto;
+import com.ninjaone.backendinterviewproject.dto.output.RmmServiceResponseDto;
 
 import javax.persistence.PersistenceException;
 
-public interface ServiceService {
+public interface RmmServiceService {
 
-    ServiceResponseDto create(ServiceRequestDto serviceRequestDto);
+    RmmServiceResponseDto create(RmmServiceRequestDto rmmServiceRequestDto);
 
-    DeviceResponseDto getById(Long id) throws PersistenceException;
+    RmmServiceResponseDto getById(Long id) throws PersistenceException;
 
     void deleteById(Long id);
 

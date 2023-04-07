@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 import javax.persistence.PersistenceException;
 
 @Service
-public class RmmServiceExecutionServiceImpl implements RmmServiceService {
+public class RmmServiceServiceImpl implements RmmServiceService {
 
     private final RmmServiceRepository rmmServiceRepository;
     private final ModelMapper mapper;
 
-    public RmmServiceExecutionServiceImpl(RmmServiceRepository rmmServiceRepository, ModelMapper mapper) {
+    public RmmServiceServiceImpl(RmmServiceRepository rmmServiceRepository, ModelMapper mapper) {
         this.rmmServiceRepository = rmmServiceRepository;
         this.mapper = mapper;
     }
