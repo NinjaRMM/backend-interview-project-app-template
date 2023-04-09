@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 public class RmmServiceExecutionResponseDto {
 
     private Long id;
-    private Integer deviceId;
-    private Integer rmmServiceId;
+    private Long deviceId;
+    private Long rmmServiceId;
     private Integer quantity;
     private LocalDateTime executionDateTime;
 
@@ -18,19 +18,19 @@ public class RmmServiceExecutionResponseDto {
         this.id = id;
     }
 
-    public Integer getDeviceId() {
+    public Long getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(Integer deviceId) {
+    public void setDeviceId(Long deviceId) {
         this.deviceId = deviceId;
     }
 
-    public Integer getRmmServiceId() {
+    public Long getRmmServiceId() {
         return rmmServiceId;
     }
 
-    public void setRmmServiceId(Integer rmmServiceId) {
+    public void setRmmServiceId(Long rmmServiceId) {
         this.rmmServiceId = rmmServiceId;
     }
 

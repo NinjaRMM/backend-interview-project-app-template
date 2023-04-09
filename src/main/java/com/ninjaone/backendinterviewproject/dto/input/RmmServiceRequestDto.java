@@ -4,7 +4,7 @@ import com.ninjaone.backendinterviewproject.model.DeviceType;
 
 public class RmmServiceRequestDto {
 
-    private final Integer id = null;
+    private final Long id = null;
     private final Float cost;
     private final String name;
     private final DeviceType deviceType;
@@ -15,7 +15,7 @@ public class RmmServiceRequestDto {
         this.deviceType = deviceType;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 

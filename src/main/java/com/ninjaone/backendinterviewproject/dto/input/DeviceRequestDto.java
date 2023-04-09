@@ -4,7 +4,7 @@ import com.ninjaone.backendinterviewproject.model.DeviceType;
 
 public class DeviceRequestDto {
 
-    private final Integer id = null;
+    private final Long id = null;
     private final String systemName;
     private final DeviceType deviceType;
 
@@ -13,7 +13,7 @@ public class DeviceRequestDto {
         this.deviceType = deviceType;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
