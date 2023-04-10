@@ -2,6 +2,7 @@ package com.ninjaone.backendinterviewproject.controller;
 
 import com.ninjaone.backendinterviewproject.dto.input.RmmServiceExecutionRequestDto;
 import com.ninjaone.backendinterviewproject.dto.output.CostsByDeviceResponseDto;
+import com.ninjaone.backendinterviewproject.dto.output.ExecutedServicesByDeviceResponseDto;
 import com.ninjaone.backendinterviewproject.dto.output.RmmServiceExecutionResponseDto;
 import com.ninjaone.backendinterviewproject.exception.ResourceNotFoundException;
 import com.ninjaone.backendinterviewproject.service.RmmServiceExecutionService;
@@ -10,6 +11,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/service-execution")
@@ -33,6 +36,12 @@ public class RmmServiceExecutionController {
     @Cacheable(value = "calculateValuesByDevice")
     public CostsByDeviceResponseDto calculateCostsByDeviceId(@PathVariable() Long deviceId) {
         return rmmServiceExecutionService.calculateCostsByDeviceId(deviceId);
+    }
+
+    @GetMapping("/executed-by-device/{deviceId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ExecutedServicesByDeviceResponseDto> getExecutedServicesByDeviceId(@PathVariable() Long deviceId) {
+        return rmmServiceExecutionService.getExecutedServicesByDeviceId(deviceId);
     }
 
     @DeleteMapping("/{id}")

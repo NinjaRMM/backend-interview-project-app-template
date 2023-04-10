@@ -2,10 +2,7 @@ package com.ninjaone.backendinterviewproject.service.impl;
 
 import com.ninjaone.backendinterviewproject.database.RmmServiceExecutionRepository;
 import com.ninjaone.backendinterviewproject.dto.input.RmmServiceExecutionRequestDto;
-import com.ninjaone.backendinterviewproject.dto.output.CostsByDeviceResponseDto;
-import com.ninjaone.backendinterviewproject.dto.output.DeviceResponseDto;
-import com.ninjaone.backendinterviewproject.dto.output.RmmServiceExecutionResponseDto;
-import com.ninjaone.backendinterviewproject.dto.output.RmmServiceResponseDto;
+import com.ninjaone.backendinterviewproject.dto.output.*;
 import com.ninjaone.backendinterviewproject.exception.BadRequestException;
 import com.ninjaone.backendinterviewproject.exception.ResourceNotFoundException;
 import com.ninjaone.backendinterviewproject.model.Device;
@@ -16,6 +13,8 @@ import com.ninjaone.backendinterviewproject.service.RmmServiceExecutionService;
 import com.ninjaone.backendinterviewproject.service.RmmServiceService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class RmmServiceExecutionServiceImpl implements RmmServiceExecutionService {
@@ -57,6 +56,15 @@ public class RmmServiceExecutionServiceImpl implements RmmServiceExecutionServic
     public CostsByDeviceResponseDto calculateCostsByDeviceId(Long deviceId) {
         return rmmServiceExecutionRepository.calculateCostsByDeviceId(deviceId)
                 .orElseThrow(() -> new ResourceNotFoundException("No costs found for this device"));
+    }
+
+    @Override
+    public List<ExecutedServicesByDeviceResponseDto> getExecutedServicesByDeviceId(Long deviceId) {
+        List<ExecutedServicesByDeviceResponseDto> responseDtoList = rmmServiceExecutionRepository.getExecutedServicesByDeviceId(deviceId);
+        if (responseDtoList.isEmpty()) {
+            throw new ResourceNotFoundException("No executed services found for this device");
+        }
+        return responseDtoList;
     }
 
 }
