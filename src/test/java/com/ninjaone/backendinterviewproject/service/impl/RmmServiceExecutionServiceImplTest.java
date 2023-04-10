@@ -2,13 +2,11 @@ package com.ninjaone.backendinterviewproject.service.impl;
 
 import com.ninjaone.backendinterviewproject.database.RmmServiceExecutionRepository;
 import com.ninjaone.backendinterviewproject.dto.input.RmmServiceExecutionRequestDto;
-import com.ninjaone.backendinterviewproject.dto.output.CostsByDeviceResponseDto;
-import com.ninjaone.backendinterviewproject.dto.output.DeviceResponseDto;
-import com.ninjaone.backendinterviewproject.dto.output.RmmServiceExecutionResponseDto;
-import com.ninjaone.backendinterviewproject.dto.output.RmmServiceResponseDto;
+import com.ninjaone.backendinterviewproject.dto.output.*;
 import com.ninjaone.backendinterviewproject.exception.BadRequestException;
 import com.ninjaone.backendinterviewproject.exception.ResourceNotFoundException;
 import com.ninjaone.backendinterviewproject.mock.CostsByDeviceResponseDtoMock;
+import com.ninjaone.backendinterviewproject.mock.ExecutedServicesByDeviceResponseDtoMock;
 import com.ninjaone.backendinterviewproject.model.Device;
 import com.ninjaone.backendinterviewproject.model.DeviceType;
 import com.ninjaone.backendinterviewproject.model.RmmService;
@@ -23,6 +21,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -152,6 +152,36 @@ class RmmServiceExecutionServiceImplTest {
         assertNotNull(exception);
     }
 
+    @Test
+    public void getExecutedServicesByDeviceIdWithSuccess() {
+        // Arrange
+        Long deviceId = 1L;
+        List<ExecutedServicesByDeviceResponseDto> mockExecuted = new ArrayList<>();
+        mockExecuted.add(new ExecutedServicesByDeviceResponseDtoMock());
+        when(rmmServiceExecutionRepository.getExecutedServicesByDeviceId(deviceId)).thenReturn(mockExecuted);
+
+        // Act
+        List<ExecutedServicesByDeviceResponseDto> result = rmmServiceExecutionService.getExecutedServicesByDeviceId(deviceId);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(mockExecuted, result);
+    }
+
+    @Test
+    public void getExecutedServicesByDeviceIdWithNoExecutedServicesByDevice() {
+        // Arrange
+        Long deviceId = 1L;
+        when(rmmServiceExecutionRepository.getExecutedServicesByDeviceId(deviceId)).thenReturn(new ArrayList<>());
+
+
+        // Act and Assert
+        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () ->
+                rmmServiceExecutionService.getExecutedServicesByDeviceId(deviceId)
+        );
+        assertNotNull(exception);
+    }
+
     private RmmService getRmmService() {
         RmmService rmmService = new RmmService();
         rmmService.setId(SERVICE_ID);
@@ -171,6 +201,7 @@ class RmmServiceExecutionServiceImplTest {
         rmmServiceExecution.setId(1L);
         rmmServiceExecution.setRmmService(getRmmService());
         rmmServiceExecution.setDevice(getDevice());
+        rmmServiceExecution.setQuantity(3);
         return rmmServiceExecution;
     }
 

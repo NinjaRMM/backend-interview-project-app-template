@@ -2,6 +2,7 @@ package com.ninjaone.backendinterviewproject.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ninjaone.backendinterviewproject.dto.input.RmmServiceExecutionRequestDto;
+import com.ninjaone.backendinterviewproject.dto.output.ExecutedServicesByDeviceResponseDto;
 import com.ninjaone.backendinterviewproject.dto.output.RmmServiceExecutionResponseDto;
 import com.ninjaone.backendinterviewproject.exception.BadRequestException;
 import com.ninjaone.backendinterviewproject.exception.ResourceNotFoundException;
@@ -17,6 +18,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -120,11 +123,26 @@ public class RmmServiceExecutionControllerTest {
 
     @Test
     void calculateCostsByDeviceIdWithNoResourcesFound() throws Exception {
-        CostsByDeviceResponseDtoMock mock = new CostsByDeviceResponseDtoMock();
-
         when(rmmServiceExecutionService.calculateCostsByDeviceId(DEVICE_ID)).thenThrow(new ResourceNotFoundException("test"));
-
         mockMvc.perform(get("/service-execution/calculate-by-device/" + DEVICE_ID))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void getExecutedServicesByDeviceId() throws Exception {
+        List<ExecutedServicesByDeviceResponseDto> mock = new ArrayList<>();
+        when(rmmServiceExecutionService.getExecutedServicesByDeviceId(DEVICE_ID)).thenReturn(mock);
+
+        mockMvc.perform(get("/service-execution/executed-by-device/" + DEVICE_ID))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(objectMapper.writeValueAsString(mock)));
+    }
+
+    @Test
+    void getExecutedServicesByDeviceIdWithNoResourcesFound() throws Exception {
+        when(rmmServiceExecutionService.getExecutedServicesByDeviceId(DEVICE_ID)).thenThrow(new ResourceNotFoundException("test"));
+        mockMvc.perform(get("/service-execution/executed-by-device/" + DEVICE_ID))
                 .andExpect(status().isNotFound());
     }
 
