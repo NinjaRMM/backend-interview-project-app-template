@@ -5,21 +5,19 @@ Also the project is configured to use an in-memory H2 database that is volatile.
 application shut down, you can change the spring.database.jdbc-url to point at a file like `jdbc:h2:file:/{your file path here}`
 
 ## Starting the Application
-
 Run the `BackendInterviewProjectApplication` class
 
-Go to:
-* http://localhost:8080/sample/1
-* http://localhost:8080/sample/2
+## Documentation
+After start the application, the **documentation** of the API can be encountered in: http://localhost:8080/api/swagger-ui/index.html#/
 
-You should see results for both of these. The application is working and connected to the H2 database. 
+Another way to see the documentation is through the Postman collection called `NinjaOne.postman_collection.json` located in the root directory
 
-## H2 Console 
+## H2 Console
 
 In order to see and interact with your db, access the h2 console in your browser.
 After running the application, go to:
 
-http://localhost:8080/h2-console
+http://localhost:8080/api/h2-console
 
 Enter the information for the url, username, and password in the application.yml:
 
@@ -29,16 +27,18 @@ username: sa
 password: password
 ```
 
-You should be able to see a db console now that has the Sample Repository in it.
+You should be able to see a db console now.
 
-Type:
+There are three main Entities you can look into the data, here are the commands for looking:
 
 ```sql
-SELECT * FROM SAMPLE;
+SELECT * FROM DEVICE
+````
+```sql
+SELECT * FROM RMM_SERVICE
+````
+```sql
+SELECT * FROM RMM_SERVICE_EXECUTION
 ````
 
-Click `Run`, you should see two rows, for ids `1` and `2`
-
-### Suggestions
-
-Feel free to remove or repurpose the existing Sample Repository, Entity, Controller, and Service. 
+Click `Run`, you should see the results
